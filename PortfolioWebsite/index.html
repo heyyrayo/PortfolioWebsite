@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Amit Manwar's professional portfolio website featuring experience, projects, certifications, education, and contact details." />
   <title>Amit Manwar | Full Stack Developer</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -78,6 +79,7 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 0.9rem 6%;
       background: rgba(10,15,30,0.92);
+      -webkit-backdrop-filter: blur(16px);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       box-shadow: 0 0 0 1px rgba(255,255,255,.02) inset;
@@ -284,6 +286,7 @@
       padding: 5rem 6%;
       position: relative;
       isolation: isolate;
+      scroll-margin-top: 92px;
     }
     section > .sec-header,
     section > .about-grid,
@@ -362,6 +365,7 @@
       border-radius: 18px; padding: 1.05rem 1.15rem;
       transition: border-color .25s, transform .25s, box-shadow .25s;
       box-shadow: 0 10px 26px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.03);
+      -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
     }
     .skill-card:hover { border-color: var(--cyan-dim); transform: translateY(-3px); }
@@ -384,6 +388,7 @@
       border: 1px solid rgba(255,255,255,.08);
       border-radius: 18px; padding: 1.2rem 1.25rem; border-left: 3px solid var(--cyan);
       box-shadow: 0 10px 28px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.03);
+      -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
     }
     .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: .9rem; }
@@ -407,6 +412,7 @@
       display: flex; flex-direction: column;
       transition: border-color .25s, transform .25s, box-shadow .25s;
       box-shadow: 0 10px 26px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.03);
+      -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
     }
     .proj-card:hover { border-color: var(--cyan-dim); transform: translateY(-5px); }
@@ -439,6 +445,7 @@
       animation: modalRise .55s var(--ease) both;
       position: relative;
       overflow: hidden;
+      -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
     }
     .cert-card:nth-child(2n) { animation-delay: .06s; }
@@ -643,6 +650,9 @@
     }
     nav {
       transition: background .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease), padding .25s var(--ease);
+      pointer-events: auto;
+      position: relative;
+      z-index: 250;
     }
     nav.scrolled {
       padding-top: .72rem;
@@ -658,6 +668,9 @@
     .nav-links a {
       position: relative;
       padding: .25rem 0;
+      pointer-events: auto;
+      z-index: 260;
+      display: inline-block;
     }
     .nav-links a::after {
       content: '';
@@ -1144,6 +1157,7 @@
       border: 1px solid rgba(34,211,238,.2);
       box-shadow: 0 24px 56px rgba(0,0,0,.35), 0 0 34px rgba(34,211,238,.14), inset 0 1px 0 rgba(255,255,255,.04);
       overflow: auto;
+      -webkit-backdrop-filter: blur(14px);
       backdrop-filter: blur(14px);
     }
 
@@ -1216,30 +1230,54 @@
       opacity: 0.7;
       transition: opacity .25s ease;
     }
+    .btn-wide {
+      width: 100%;
+      justify-content: center;
+      margin-top: .5rem;
+      font-size: .83rem;
+    }
+    .btn-inline {
+      width: fit-content;
+    }
+    .accent-text {
+      color: var(--text);
+    }
+    .accent-cyan {
+      color: var(--cyan);
+    }
+    .exp-btn-wrap {
+      margin-top: 1rem;
+    }
+    .proj-link-disabled {
+      opacity: .4;
+      cursor: default;
+    }
   </style>
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 <div class="site-noise" aria-hidden="true"></div>
 
-<!-- ══ NAV ══ -->
-<nav>
-  <div class="nav-logo">AM<span>.</span></div>
-  <ul class="nav-links">
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#certifications">Certs</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="mailto:amitmanwar001@gmail.com" class="nav-cta">Hire Me</a>
-</nav>
+<header class="site-header">
+  <nav aria-label="Primary site navigation">
+    <div class="nav-logo">AM<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:amitmanwar001@gmail.com" class="nav-cta">Hire Me</a>
+  </nav>
+</header>
 
-<!-- ══ HERO ══ -->
-<section id="hero">
+<main id="main-content" tabindex="-1">
+  <!-- ══ HERO ══ -->
+  <section id="hero">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hero-inner">
@@ -1263,17 +1301,17 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Contact Me
         </a>
-        <a href="https://github.com/heyyrayo" target="_blank" class="btn btn-ghost">
+        <a href="https://github.com/heyyrayo" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
           GitHub
         </a>
       </div>
       <div class="hero-socials">
-        <a href="https://www.linkedin.com/in/amit-manwar-157a77349" target="_blank" class="social-pill">
+        <a href="https://www.linkedin.com/in/amit-manwar-157a77349" target="_blank" rel="noopener noreferrer" class="social-pill">
           <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           LinkedIn
         </a>
-        <a href="https://github.com/heyyrayo" target="_blank" class="social-pill">
+        <a href="https://github.com/heyyrayo" target="_blank" rel="noopener noreferrer" class="social-pill">
           <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
           GitHub
         </a>
@@ -1321,15 +1359,15 @@
         <span class="about-detail-val"><span class="status-dot"></span>Open to Work</span>
       </div>
       <div class="about-divider"></div>
-      <a href="mailto:amitmanwar001@gmail.com" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.5rem;font-size:.83rem;">
+      <a href="mailto:amitmanwar001@gmail.com" class="btn btn-primary btn-wide">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         Get In Touch
       </a>
     </div>
     <div class="about-right">
       <p>
-        I'm <strong style="color:var(--text)">Amit Manwar</strong>, a passionate Full Stack Developer
-        and B.Tech CSE student at <strong style="color:var(--cyan)">Maharashtra Institute of Technology,
+        I'm <strong class="accent-text">Amit Manwar</strong>, a passionate Full Stack Developer
+        and B.Tech CSE student at <strong class="accent-cyan">Maharashtra Institute of Technology,
         Chh. Sambhajinagar</strong> with a strong CGPA of 8.85.
       </p>
       <p>
@@ -1338,13 +1376,13 @@
         completing an industry internship, and earning multiple certifications in AI, development, and productivity tools.
       </p>
       <p>
-        At my internship with <strong style="color:var(--text)">Visanet Software Pvt. Ltd.</strong>,
+        At my internship with <strong class="accent-text">Visanet Software Pvt. Ltd.</strong>,
         I contributed to a real-world restaurant website, working across the full stack — front-end design,
         PHP back-end logic, and MySQL database integration.
       </p>
       <p>
         I'm driven by clean code, solving real problems through technology, and a growing interest in
-        <strong style="color:var(--cyan)">AI-driven development</strong>. I'm actively seeking
+        <strong class="accent-cyan">AI-driven development</strong>. I'm actively seeking
         opportunities to contribute to impactful engineering teams.
       </p>
       <div class="about-highlights">
@@ -1426,21 +1464,21 @@
       <span class="exp-badge">Internship Certificate</span>
     </div>
     <p class="exp-desc">
-      Worked on the development of <strong style="color:var(--text)">Grand Line</strong> — a professional restaurant website —
+      Worked on the development of <strong class="accent-text">Grand Line</strong> — a professional restaurant website —
       gaining real-world experience across the full development lifecycle from front-end design to back-end logic and database integration.
     </p>
     <ul class="exp-bullets">
       <li>Assisted in building and enhancing the Grand Line restaurant website, contributing to front-end UI and back-end functionality.</li>
-      <li>Implemented server-side features using <strong style="color:var(--text)">PHP</strong> and integrated <strong style="color:var(--text)">MySQL</strong> databases for dynamic content management.</li>
+      <li>Implemented server-side features using <strong class="accent-text">PHP</strong> and integrated <strong class="accent-text">MySQL</strong> databases for dynamic content management.</li>
       <li>Collaborated with the development team to troubleshoot and improve existing features, enhancing application stability.</li>
-      <li>Set up and managed local development environments using <strong style="color:var(--text)">XAMPP</strong>, streamlining team testing workflows.</li>
+      <li>Set up and managed local development environments using <strong class="accent-text">XAMPP</strong>, streamlining team testing workflows.</li>
       <li>Strengthened skills in Web Development, Front-End &amp; Back-End Programming, and Database Integration in a professional environment.</li>
     </ul>
     <div class="exp-tech">
       <span>PHP</span><span>MySQL</span><span>HTML</span><span>CSS</span>
       <span>JavaScript</span><span>XAMPP</span><span>VS Code</span>
     </div>
-    <div style="margin-top:1rem;">
+    <div class="exp-btn-wrap">
       <button class="btn btn-outline cert-link-btn" type="button" data-image="Certifications/Visanet Internship Certificate.jpeg">
         View Internship Certificate
       </button>
@@ -1473,11 +1511,11 @@
           <span class="proj-tag">JavaScript</span><span class="proj-tag">XAMPP</span>
         </div>
         <div class="proj-links">
-          <a href="https://github.com/heyyrayo" target="_blank" class="proj-link">
+          <a href="https://github.com/heyyrayo" target="_blank" rel="noopener noreferrer" class="proj-link">
             <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub
           </a>
-          <span class="proj-link" style="opacity:.4;cursor:default;">🔒 Private Repo</span>
+          <span class="proj-link proj-link-disabled">🔒 Private Repo</span>
         </div>
       </div>
     </div>
@@ -1492,7 +1530,7 @@
           <span class="proj-tag">MongoDB</span><span class="proj-tag">Express</span><span class="proj-tag">JWT</span>
         </div>
         <div class="proj-links">
-          <a href="https://github.com/heyyrayo" target="_blank" class="proj-link">
+          <a href="https://github.com/heyyrayo" target="_blank" rel="noopener noreferrer" class="proj-link">
             <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub
           </a>
@@ -1511,7 +1549,7 @@
           <span class="proj-tag">Socket.io</span><span class="proj-tag">MongoDB</span>
         </div>
         <div class="proj-links">
-          <a href="https://github.com/heyyrayo" target="_blank" class="proj-link">
+          <a href="https://github.com/heyyrayo" target="_blank" rel="noopener noreferrer" class="proj-link">
             <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub
           </a>
@@ -1607,11 +1645,11 @@
         </div>
         <div class="contact-card">
           <div class="cc-icon">💼</div>
-          <div><div class="cc-label">LinkedIn</div><div class="cc-val"><a href="https://www.linkedin.com/in/amit-manwar-157a77349" target="_blank">linkedin.com/in/amit-manwar-157a77349</a></div></div>
+          <div><div class="cc-label">LinkedIn</div><div class="cc-val"><a href="https://www.linkedin.com/in/amit-manwar-157a77349" target="_blank" rel="noopener noreferrer">linkedin.com/in/amit-manwar-157a77349</a></div></div>
         </div>
         <div class="contact-card">
           <div class="cc-icon">🐙</div>
-          <div><div class="cc-label">GitHub</div><div class="cc-val"><a href="https://github.com/heyyrayo" target="_blank">github.com/heyyrayo</a></div></div>
+          <div><div class="cc-label">GitHub</div><div class="cc-val"><a href="https://github.com/heyyrayo" target="_blank" rel="noopener noreferrer">github.com/heyyrayo</a></div></div>
         </div>
         <div class="contact-card">
           <div class="cc-icon">📍</div>
@@ -1621,19 +1659,36 @@
     </div>
     <form class="contact-form" onsubmit="handleSend(event)">
       <div class="form-row">
-        <div class="form-group"><label>First Name</label><input type="text" placeholder="John" /></div>
-        <div class="form-group"><label>Last Name</label><input type="text" placeholder="Doe" /></div>
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input id="firstName" name="first_name" type="text" placeholder="John" autocomplete="given-name" />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input id="lastName" name="last_name" type="text" placeholder="Doe" autocomplete="family-name" />
+        </div>
       </div>
-      <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@example.com" /></div>
-      <div class="form-group"><label>Subject</label><input type="text" placeholder="Job Opportunity / Project Inquiry" /></div>
-      <div class="form-group"><label>Message</label><textarea placeholder="Tell me about the opportunity or project..."></textarea></div>
-      <button type="submit" class="btn btn-primary" id="sendBtn" style="width:fit-content;">
+      <div class="form-group">
+        <label for="emailAddress">Email Address</label>
+        <input id="emailAddress" name="email" type="email" placeholder="john@example.com" autocomplete="email" />
+      </div>
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input id="subject" name="subject" type="text" placeholder="Job Opportunity / Project Inquiry" />
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell me about the opportunity or project..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-inline" id="sendBtn">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         Send Message
       </button>
     </form>
   </div>
 </section>
+
+</main>
 
 <!-- ══ FOOTER ══ -->
 <footer>
@@ -1649,10 +1704,10 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="footer-socials">
-      <a href="https://github.com/heyyrayo" target="_blank" class="fsocial" title="GitHub">
+      <a href="https://github.com/heyyrayo" target="_blank" rel="noopener noreferrer" class="fsocial" title="GitHub">
         <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
       </a>
-      <a href="https://www.linkedin.com/in/amit-manwar-157a77349" target="_blank" class="fsocial" title="LinkedIn">
+      <a href="https://www.linkedin.com/in/amit-manwar-157a77349" target="_blank" rel="noopener noreferrer" class="fsocial" title="LinkedIn">
         <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
       </a>
       <a href="mailto:amitmanwar001@gmail.com" class="fsocial" title="Email">
@@ -1717,6 +1772,28 @@
   const navAs = document.querySelectorAll('.nav-links a');
   const nav = document.querySelector('nav');
   const scrollProgress = document.getElementById('scrollProgress');
+
+  document.querySelectorAll('.nav-links a[href^="#"], .hero-btns a[href^="#"], .footer-links a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+
+      const targetId = href.slice(1);
+      const target = document.getElementById(targetId);
+      if (!target) return;
+
+      e.preventDefault();
+      const navOffset = nav ? nav.getBoundingClientRect().height : 0;
+      const targetTop = target.getBoundingClientRect().top + window.scrollY - navOffset - 16;
+
+      window.scrollTo({ top: targetTop, behavior: 'smooth' });
+      if (history.pushState) {
+        history.pushState(null, '', href);
+      } else {
+        window.location.hash = href;
+      }
+    });
+  });
 
   function updateScrollEffects() {
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
