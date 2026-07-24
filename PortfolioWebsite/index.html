@@ -416,6 +416,7 @@
       backdrop-filter: blur(8px);
     }
     .proj-card:hover { border-color: var(--cyan-dim); transform: translateY(-5px); }
+    a.proj-card-link { text-decoration: none; color: inherit; cursor: pointer; }
     .proj-thumb { height: 150px; display: flex; align-items: center; justify-content: center; font-size: 3rem; position: relative; }
     .pt1 { background: linear-gradient(135deg, #0c1f1a, #0f3028); }
     .pt2 { background: linear-gradient(135deg, #0f1b35, #1a2a55); }
@@ -1496,11 +1497,10 @@
   </div>
   <div class="projects-grid">
 
-    <div class="proj-card">
+    <a href="https://github.com/heyyrayo/grand_line" target="_blank" rel="noopener noreferrer" class="proj-card proj-card-link">
       <div class="proj-thumb pt1">
-        🍽️
+        <img src="Grand_Line.png" alt="Grand Line Restaurant Website preview" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:0;" />
         <span class="proj-type">Web App</span>
-        <span class="proj-featured">✦ Real Project</span>
       </div>
       <div class="proj-body">
         <h3 class="proj-title">Grand Line — Restaurant Website</h3>
@@ -1511,14 +1511,13 @@
           <span class="proj-tag">JavaScript</span><span class="proj-tag">XAMPP</span>
         </div>
         <div class="proj-links">
-          <a href="https://github.com/heyyrayo" target="_blank" rel="noopener noreferrer" class="proj-link">
+          <span class="proj-link">
             <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.005 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub
-          </a>
-          <span class="proj-link proj-link-disabled">🔒 Private Repo</span>
+          </span>
         </div>
       </div>
-    </div>
+    </a>
 
     <div class="proj-card">
       <div class="proj-thumb pt2">🛒<span class="proj-type">Full Stack</span></div>
@@ -2005,6 +2004,24 @@
             badge: "✅ Course Completion",
             icon: "💻",
             filePath: "Certifications/C Programming Course.png"
+        },
+        {
+            title: "Prompt Engineering",
+            issuer: "Coursera / IBM",
+            description: "Learned best practices and advanced techniques for crafting effective prompts to get optimal outputs from large language models.",
+            year: "2026",
+            badge: "✅ Course Completion",
+            icon: "💬",
+            filePath: "Certifications/Prompt Engineering.jpg"
+        },
+        {
+            title: "Data Analysis Using Python",
+            issuer: "Coursera / IBM",
+            description: "Gained hands-on experience in data analysis using Python, covering data wrangling, visualization, and statistical exploration with pandas and matplotlib.",
+            year: "2026",
+            badge: "✅ Course Completion",
+            icon: "📊",
+            filePath: "Certifications/Data Analysis Using Python.png"
         }
     ];
 
