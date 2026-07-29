@@ -61,8 +61,8 @@
     ::-webkit-scrollbar-thumb { background: var(--cyan-dim); border-radius: 3px; }
 
     /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
       display: flex; justify-content: space-between; align-items: center;
       padding: 0 6%;
       height: 62px;
@@ -72,7 +72,7 @@
       border-bottom: 1px solid var(--border);
       transition: background .25s, box-shadow .25s;
     }
-    nav.scrolled {
+    .site-nav.scrolled {
       background: rgba(7,11,22,.94);
       border-bottom-color: rgba(34,211,238,.28);
       box-shadow: 0 8px 32px rgba(0,0,0,.28);
@@ -103,43 +103,147 @@
     }
     .nav-cta:hover { background: #67e8f9; }
 
-    /* Hamburger */
-    .nav-hamburger {
-      display: none;
-      flex-direction: column; justify-content: center; gap: 5px;
-      width: 38px; height: 38px; cursor: pointer;
-      background: none; border: none; padding: 4px;
-    }
-    .nav-hamburger span {
-      display: block; height: 2px; width: 100%;
-      background: var(--text); border-radius: 2px;
-      transition: transform .3s, opacity .3s;
-    }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    /* Hamburger — hidden; replaced by Hire Me on mobile */
+    .nav-hamburger { display: none !important; }
 
-    /* Mobile drawer */
+    /* ── MOBILE NAV OVERLAY ── */
+    .nav-overlay {
+      position: fixed; inset: 0; z-index: 997;
+      background: rgba(4,7,16,.72);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .32s var(--ease), visibility .32s;
+    }
+    .nav-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; }
+
+    /* ── MOBILE BOTTOM-SHEET DRAWER ── */
     .nav-mobile-menu {
-      display: none;
-      position: fixed; top: 62px; left: 0; right: 0;
-      background: rgba(7,11,22,.98);
-      border-bottom: 1px solid var(--border);
-      flex-direction: column; gap: 0;
-      z-index: 199;
-      -webkit-backdrop-filter: blur(16px);
-      backdrop-filter: blur(16px);
-      transform: translateY(-110%);
-      transition: transform .3s var(--ease);
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 998;
+      display: flex; flex-direction: column;
+      background: #0c1120;
+      border-top: 1px solid rgba(34,211,238,.18);
+      border-radius: 20px 20px 0 0;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      transform: translateY(105%);
+      visibility: hidden;
+      pointer-events: none;
+      transition: transform .38s var(--ease), visibility .38s;
+      /* cap at ~90vh so content on short screens remains accessible */
+      max-height: 90vh;
+      overflow-y: auto;
     }
-    .nav-mobile-menu.open { transform: translateY(0); }
-    .nav-mobile-menu a {
-      display: block; padding: .95rem 6%;
-      font-size: .92rem; color: var(--muted);
-      border-bottom: 1px solid rgba(30,45,74,.5);
+    .nav-mobile-menu.open {
+      transform: translateY(0);
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    /* drag handle pill */
+    .nav-drawer-handle {
+      width: 36px; height: 4px;
+      background: rgba(255,255,255,.15);
+      border-radius: 99px;
+      margin: 12px auto 0;
+      flex-shrink: 0;
+    }
+
+    /* drawer header row */
+    .nav-drawer-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .9rem 6% .65rem;
+      border-bottom: 1px solid rgba(30,45,74,.55);
+      flex-shrink: 0;
+    }
+    .nav-drawer-logo {
+      font-size: 1.15rem; font-weight: 800; color: var(--cyan);
+      letter-spacing: -.01em;
+    }
+    .nav-drawer-logo span { color: var(--text); }
+    .nav-drawer-close {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid rgba(34,211,238,.2);
+      background: rgba(34,211,238,.06);
+      color: var(--muted); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; line-height: 1;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .nav-drawer-close:hover { background: rgba(34,211,238,.14); color: var(--cyan); border-color: rgba(34,211,238,.4); }
+
+    /* section label inside drawer */
+    .nav-drawer-section {
+      font-size: .68rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted);
+      padding: .9rem 6% .35rem;
+      flex-shrink: 0;
+    }
+
+    /* nav links list */
+    .nav-mobile-links {
+      list-style: none;
+      padding: 0 4% .5rem;
+      flex-shrink: 0;
+    }
+    .nav-mobile-links li { display: flex; }
+    .nav-mobile-links a {
+      display: flex; align-items: center; gap: .75rem;
+      width: 100%;
+      padding: .72rem 3%;
+      font-size: .95rem; font-weight: 500; color: var(--muted);
+      border-radius: 10px;
       transition: color .2s, background .2s;
+      letter-spacing: .01em;
     }
-    .nav-mobile-menu a:hover, .nav-mobile-menu a.active { color: var(--cyan); background: rgba(34,211,238,.04); }
+    .nav-mobile-links a:hover,
+    .nav-mobile-links a.active {
+      color: var(--cyan);
+      background: rgba(34,211,238,.07);
+    }
+    .nav-mobile-links a.active { font-weight: 600; }
+
+    /* icon badge */
+    .nm-icon {
+      width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(30,45,74,.55);
+      border: 1px solid rgba(30,45,74,.8);
+      transition: background .2s, border-color .2s;
+    }
+    .nav-mobile-links a:hover .nm-icon,
+    .nav-mobile-links a.active .nm-icon {
+      background: rgba(34,211,238,.12);
+      border-color: rgba(34,211,238,.3);
+    }
+    .nm-icon svg { width: 15px; height: 15px; stroke: var(--muted); fill: none; stroke-width: 2; transition: stroke .2s; }
+    .nav-mobile-links a:hover .nm-icon svg,
+    .nav-mobile-links a.active .nm-icon svg { stroke: var(--cyan); }
+
+    /* arrow indicator */
+    .nm-arrow {
+      margin-left: auto;
+      opacity: 0; transform: translateX(-4px);
+      transition: opacity .2s, transform .2s;
+    }
+    .nm-arrow svg { width: 14px; height: 14px; stroke: var(--cyan); fill: none; stroke-width: 2.5; }
+    .nav-mobile-links a:hover .nm-arrow,
+    .nav-mobile-links a.active .nm-arrow { opacity: 1; transform: translateX(0); }
+
+    /* bottom CTA */
+    .nav-drawer-cta {
+      padding: .75rem 6% 1rem;
+      flex-shrink: 0;
+    }
+    .nav-mobile-hire {
+      display: flex; align-items: center; justify-content: center; gap: .55rem;
+      padding: .88rem 1rem; width: 100%;
+      background: var(--cyan); color: #0a0f1e;
+      font-size: .92rem; font-weight: 700;
+      border-radius: 12px;
+      transition: background .2s, transform .15s;
+    }
+    .nav-mobile-hire:hover { background: #67e8f9; transform: translateY(-1px); }
+    .nav-mobile-hire svg { width: 15px; height: 15px; flex-shrink: 0; }
 
     /* ── HERO ── */
     #hero {
@@ -371,8 +475,8 @@
     .exp-badge { background: rgba(34,211,238,.1); border: 1px solid rgba(34,211,238,.25); color: var(--cyan); font-size: .72rem; padding: .25rem .7rem; border-radius: 100px; white-space: nowrap; }
     .exp-desc { color: var(--muted); font-size: .92rem; margin-bottom: 1rem; line-height: 1.75; }
     .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1rem; }
-    .exp-bullets li { display: flex; gap: .65rem; color: var(--muted); font-size: .88rem; align-items: flex-start; line-height: 1.6; }
-    .exp-bullets li::before { content: '▸'; color: var(--cyan); flex-shrink: 0; margin-top: .05rem; }
+    .exp-bullets li { display: block; padding-left: 1.1rem; position: relative; color: var(--muted); font-size: .88rem; line-height: 1.6; }
+    .exp-bullets li::before { content: '▸'; color: var(--cyan); position: absolute; left: 0; top: .05rem; }
     .exp-tech { display: flex; flex-wrap: wrap; gap: .45rem; }
     .exp-tech span { background: var(--surface2); border: 1px solid var(--border); color: var(--muted); font-size: .74rem; padding: .2rem .6rem; border-radius: 5px; }
     .exp-btn-wrap { margin-top: 1rem; }
@@ -619,11 +723,10 @@
     }
 
     @media (max-width: 768px) {
-      /* Nav */
-      nav { padding: 0 5%; }
-      .nav-links, .nav-cta { display: none; }
-      .nav-hamburger { display: flex; }
-      .nav-mobile-menu { display: flex; }
+      /* Nav — show only logo + Hire Me, hide desktop links */
+      .site-nav { padding: 0 5%; }
+      .nav-links { display: none; }
+      .nav-cta { display: flex; }
 
       section { padding: 3.5rem 5%; scroll-margin-top: 62px; }
       html { scroll-padding-top: 62px; }
@@ -678,7 +781,7 @@
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <header>
-  <nav aria-label="Primary navigation">
+  <nav class="site-nav" aria-label="Primary navigation">
     <div class="nav-logo">AM<span>.</span></div>
     <ul class="nav-links">
       <li><a href="#hero">Home</a></li>
@@ -691,20 +794,6 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
     <a href="mailto:amitmanwar001@gmail.com" class="nav-cta">Hire Me</a>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-  <nav class="nav-mobile-menu" id="navMobileMenu" aria-label="Mobile navigation">
-    <a href="#hero">Home</a>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#certifications">Certifications</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
-    <a href="mailto:amitmanwar001@gmail.com" style="color:var(--cyan);font-weight:700;">✉ Hire Me</a>
   </nav>
 </header>
 
@@ -866,11 +955,11 @@
         gaining real-world experience across the full development lifecycle from front-end design to back-end logic and database integration.
       </p>
       <ul class="exp-bullets">
-        <li>Assisted in building and enhancing the Grand Line restaurant website, contributing to front-end UI and back-end functionality.</li>
-        <li>Implemented server-side features using <strong class="accent-text">PHP</strong> and integrated <strong class="accent-text">MySQL</strong> databases for dynamic content management.</li>
+        <li>Assisted in building and enhancing the <strong>Grand Line</strong> restaurant website, contributing to front-end UI and back-end functionality.</li>
+        <li>Implemented server-side features using <strong>PHP</strong> and integrated <strong>MySQL</strong> databases for dynamic content management.</li>
         <li>Collaborated with the development team to troubleshoot and improve existing features, enhancing application stability.</li>
-        <li>Set up and managed local development environments using <strong class="accent-text">XAMPP</strong>, streamlining team testing workflows.</li>
-        <li>Strengthened skills in Web Development, Front-End &amp; Back-End Programming, and Database Integration in a professional environment.</li>
+        <li>Set up and managed local development environments using <strong>XAMPP</strong>, streamlining team testing workflows.</li>
+        <li>Strengthened skills in <strong>Web Development</strong>, Front-End &amp; Back-End Programming, and Database Integration in a professional environment.</li>
       </ul>
       <div class="exp-tech">
         <span>PHP</span><span>MySQL</span><span>HTML</span><span>CSS</span>
@@ -1097,22 +1186,6 @@
 <script>
   document.body.classList.add('js-enabled');
 
-  /* ── Hamburger ── */
-  const hamburger = document.getElementById('navHamburger');
-  const mobileMenu = document.getElementById('navMobileMenu');
-  hamburger.addEventListener('click', () => {
-    const open = hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open', open);
-    hamburger.setAttribute('aria-expanded', open);
-  });
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-    });
-  });
-
   /* ── Typewriter ── */
   const roles = ['Full Stack Web Apps','React Frontends','Node.js Backends','Database Solutions','Web Experiences'];
   let ri = 0, ci = 0, del = false;
@@ -1129,8 +1202,8 @@
 
   /* ── Scroll: progress bar + nav active + scrolled class ── */
   const secs = document.querySelectorAll('section[id]');
-  const navAs = document.querySelectorAll('.nav-links a, .nav-mobile-menu a');
-  const nav = document.querySelector('nav');
+  const navAs = document.querySelectorAll('.nav-links a');
+  const nav = document.querySelector('.site-nav');
   const scrollProgress = document.getElementById('scrollProgress');
 
   function updateScroll() {
