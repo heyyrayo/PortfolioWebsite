@@ -35,6 +35,7 @@
       opacity: .8;
     }
     body > * { position: relative; z-index: 1; }
+    header { z-index: 1000; }
     a { text-decoration: none; color: inherit; }
 
     :root {
@@ -99,12 +100,22 @@
       background: var(--cyan); color: #0a0f1e;
       padding: .4rem 1rem; border-radius: 7px;
       font-size: .82rem; font-weight: 700; transition: background .2s;
-      white-space: nowrap;
+      white-space: nowrap; cursor: pointer; text-decoration: none;
+      pointer-events: auto;
     }
     .nav-cta:hover { background: #67e8f9; }
 
-    /* Hamburger — hidden; replaced by Hire Me on mobile */
-    .nav-hamburger { display: none !important; }
+    /* Hamburger — hidden on desktop, shown on mobile */
+    .nav-hamburger {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      color: var(--cyan); padding: .25rem; margin-left: .5rem;
+      flex-shrink: 0;
+    }
+    .nav-hamburger svg { width: 22px; height: 22px; display: block; }
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; align-items: center; }
+    }
 
     /* ── MOBILE NAV OVERLAY ── */
     .nav-overlay {
@@ -723,10 +734,10 @@
     }
 
     @media (max-width: 768px) {
-      /* Nav — show only logo + Hire Me, hide desktop links */
+      /* Nav — show only logo + hamburger on mobile */
       .site-nav { padding: 0 5%; }
       .nav-links { display: none; }
-      .nav-cta { display: flex; }
+      .nav-cta { display: none; }
 
       section { padding: 3.5rem 5%; scroll-margin-top: 62px; }
       html { scroll-padding-top: 62px; }
@@ -793,9 +804,73 @@
       <li><a href="#education">Education</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a href="mailto:amitmanwar001@gmail.com" class="nav-cta">Hire Me</a>
+    <a href="mailto:amitmanwar001@gmail.com" class="nav-cta" target="_blank" rel="noopener noreferrer">Hire Me</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMobileMenu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
   </nav>
 </header>
+
+<!-- MOBILE NAV OVERLAY -->
+<div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-mobile-menu" id="navMobileMenu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="nav-drawer-handle" aria-hidden="true"></div>
+  <div class="nav-drawer-header">
+    <div class="nav-drawer-logo">AM<span>.</span></div>
+    <button class="nav-drawer-close" id="navDrawerClose" aria-label="Close menu">&times;</button>
+  </div>
+  <div class="nav-drawer-section">Navigation</div>
+  <ul class="nav-mobile-links" id="navMobileLinks">
+    <li><a href="#hero">
+      <span class="nm-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+      Home
+      <span class="nm-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+    </a></li>
+    <li><a href="#about">
+      <span class="nm-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
+      About
+      <span class="nm-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+    </a></li>
+    <li><a href="#skills">
+      <span class="nm-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+      Skills
+      <span class="nm-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+    </a></li>
+    <li><a href="#experience">
+      <span class="nm-icon"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></span>
+      Experience
+      <span class="nm-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+    </a></li>
+    <li><a href="#projects">
+      <span class="nm-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span>
+      Projects
+      <span class="nm-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+    </a></li>
+    <li><a href="#certifications">
+      <span class="nm-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></span>
+      Certifications
+      <span class="nm-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+    </a></li>
+    <li><a href="#education">
+      <span class="nm-icon"><svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
+      Education
+      <span class="nm-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+    </a></li>
+    <li><a href="#contact">
+      <span class="nm-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+      Contact
+      <span class="nm-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+    </a></li>
+  </ul>
+  <div class="nav-drawer-cta">
+    <a href="mailto:amitmanwar001@gmail.com" class="nav-mobile-hire" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Hire Me
+    </a>
+  </div>
+</div>
 
 <main id="main-content" tabindex="-1">
 
@@ -1213,6 +1288,7 @@
     let cur = '';
     secs.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
     navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+    document.querySelectorAll('#navMobileLinks a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
   }
   updateScroll();
   window.addEventListener('scroll', updateScroll, { passive: true });
@@ -1314,6 +1390,49 @@
   document.getElementById('closeModal').addEventListener('click', closeModal);
   document.getElementById('cancelModal').addEventListener('click', closeModal);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* ── Mobile nav drawer ── */
+  const hamburger = document.getElementById('navHamburger');
+  const navOverlay = document.getElementById('navOverlay');
+  const navMobileMenu = document.getElementById('navMobileMenu');
+  const navDrawerClose = document.getElementById('navDrawerClose');
+  const mobileLinks = document.querySelectorAll('#navMobileLinks a');
+
+  function openDrawer() {
+    navMobileMenu.classList.add('open');
+    navOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    hamburger.setAttribute('aria-expanded', 'true');
+    navOverlay.setAttribute('aria-hidden', 'false');
+  }
+  function closeDrawer() {
+    navMobileMenu.classList.remove('open');
+    navOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+    hamburger.setAttribute('aria-expanded', 'false');
+    navOverlay.setAttribute('aria-hidden', 'true');
+  }
+
+  if (hamburger) hamburger.addEventListener('click', openDrawer);
+  if (navDrawerClose) navDrawerClose.addEventListener('click', closeDrawer);
+  if (navOverlay) navOverlay.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && navMobileMenu && navMobileMenu.classList.contains('open')) closeDrawer(); });
+
+  /* Smooth scroll + close drawer for mobile links */
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      const id = link.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      closeDrawer();
+      setTimeout(() => {
+        const offset = nav ? nav.getBoundingClientRect().height : 62;
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset - 8, behavior: 'smooth' });
+        if (history.pushState) history.pushState(null, '', '#' + id);
+      }, 320); /* wait for drawer close animation */
+    });
+  });
 
   /* ── Hero stat count-up (desktop only) ── */
   if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
